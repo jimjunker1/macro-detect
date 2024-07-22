@@ -1,0 +1,47 @@
+---
+author: Jim Junker
+date: '`r format(Sys.Date())`'
+title: Bounding Box Tutorial
+subtitle: Workflow to annotate, train, and model bounding boxes for AutoTaxonomizer
+output: html_document
+---
+
+```{r setup, include = FALSE, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+```
+
+```{r initiate}
+
+
+```
+
+# Purpose
+
+This document outlines the steps to setup the workflow for image detection of aquatic macroinvertebrates for the 'AutoTaxonomizer' project. It includes steps to download and configure tools to help annotate images, export bounding box information, and train and validate a bounding box regression model to automate the bounding box process.
+
+## Setup
+
+First, we need to ensure we have the necessary programs are install on your device. To accomplish the tasks, the following programs are required:
+
+- Python [windows](https://www.python.org/downloads/windows/),[macOS](https://www.python.org/downloads/macos/)
+
+- Tensorflow [windows](https://www.tensorflow.org/install/pip#windows-wsl2), [macOS](https://www.tensorflow.org/install/pip#macos)
+
+optional programs:
+
+- 
+
+## Image annotation
+
+The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. You 
+
+## Bounding Box Regression
+
+The guide upon which this outline is based can be [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/).
+
+Be sure you have installed Python and Tensorflow for the following 
+
+
+
+
