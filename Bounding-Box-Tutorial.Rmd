@@ -2,7 +2,7 @@
 author: Jim Junker
 date: '`r format(Sys.Date())`'
 title: Bounding Box Tutorial
-subtitle: Workflow to annotate, train, and model bounding boxes for AutoTaxonomizer
+subtitle: Workflow to annotate, train, and predict bounding boxes for AutoTaxonomizer
 output: html_document
 ---
 
@@ -34,14 +34,15 @@ optional programs:
 
 ## Image annotation
 
-The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. You 
+The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. 
 
 ## Bounding Box Regression
 
-The guide upon which this outline is based can be [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/).
+This outline is loosely based upon this guide [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/). With a video tutorial [here](https://www.google.com/search?client=firefox-b-1-e&q=bounding+box+regression+Keras+Tensorflow+tutorial+with+code#fpstate=ive&vld=cid:eaa207bd,vid:QcA7zjBpbVg,st:0).
 
-Be sure you have installed Python and Tensorflow for the following 
+<center>Be sure you have installed Python and Tensorflow to perform the following analyses.</center>
+
+<!-- #https://pyimagesearch.com/2019/06/03/fine-tuning-with-keras-and-deep-learning/ -->
 
 
-
-
+&nbsp;

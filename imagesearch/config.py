@@ -6,8 +6,8 @@ import os
 # the path to the images directory and annotation CSV file
 
 BASE_PATH = 'data'
-IMAGES_PATH = os.path.sep.join(BASE_PATH, 'images')
-ANNOTS_PATH = os.path.sep.join(BASE_PATH, '')
+IMAGES_PATH = os.path.sep.join([BASE_PATH, 'images'])
+ANNOTS_PATH = os.path.sep.join([BASE_PATH, ''])
 
 
 # define the path to the base output directory
