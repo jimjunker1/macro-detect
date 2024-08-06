@@ -36,6 +36,16 @@ optional programs:
 
 The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. 
 
+- get some screenshots of workflow
+
+- CVAT 
+
+- saving procedures and output directions for directory
+
+- 
+
+
+
 ## Bounding Box Regression
 
 This outline is loosely based upon this guide [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/). With a video tutorial [here](https://www.google.com/search?client=firefox-b-1-e&q=bounding+box+regression+Keras+Tensorflow+tutorial+with+code#fpstate=ive&vld=cid:eaa207bd,vid:QcA7zjBpbVg,st:0).
