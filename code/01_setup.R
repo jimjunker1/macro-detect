@@ -1,5 +1,5 @@
 library(tensorflow)
 library(keras)
 library(here)
-
+library(reticulate)
 source_python(here("code/config.py"))
