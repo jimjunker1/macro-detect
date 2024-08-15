@@ -8,10 +8,36 @@ output: html_document
 
 ```{r setup, include = FALSE, echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(here)
+i_am('Bounding-Box-Tutorial.Rmd')
+library(reticulate)
 
 ```
 
 ```{r initiate}
+# setup the virtual environment for python
+if (!dir.exists(here("virtualenv/"))) {
+  reticulate::conda_create(here("virtualenv/"))
+}
+# the .Rprofile should automatically use this python version
+reticulate::use_condaenv(here('virtualenv/'))
+# let's install the required python modules
+if(!reticulate::py_module_available('sklearn')){
+reticulate::conda_install(
+  packages = c('scikit-learn'),
+  envname = here('virtualenv/')
+)}
+
+if(!reticulate::py_module_available('tensorflow')){
+reticulate::py_install(
+  packages = c('tensorflow'),
+  envname = here('virtualenv/'),
+  pip = TRUE
+)}
+# set to use the local python environment
+sklearn <- reticulate::import('sklearn', convert = FALSE)
+tf <- reticulate::import('tensorflow', convert = FALSE)
+
 
 
 ```
@@ -36,11 +62,21 @@ optional programs:
 
 The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. 
 
+- get some screenshots of workflow
+
+- CVAT 
+
+- saving procedures and output directions for directory
+
+- 
+
 ## Bounding Box Regression
 
 This outline is loosely based upon this guide [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/). With a video tutorial [here](https://www.google.com/search?client=firefox-b-1-e&q=bounding+box+regression+Keras+Tensorflow+tutorial+with+code#fpstate=ive&vld=cid:eaa207bd,vid:QcA7zjBpbVg,st:0).
 
 <center>Be sure you have installed Python and Tensorflow to perform the following analyses.</center>
+
+
 
 <!-- #https://pyimagesearch.com/2019/06/03/fine-tuning-with-keras-and-deep-learning/ -->
 
