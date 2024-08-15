@@ -1,0 +1,37 @@
+{
+  "build": "py310h5588dad_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [],
+  "depends": [
+    "matplotlib-base >=3.9.1,<3.9.2.0a0",
+    "pyside6 >=6.7.2",
+    "python >=3.10,<3.11.0a0",
+    "python_abi 3.10.* *_cp310",
+    "tornado >=5"
+  ],
+  "extracted_package_dir": "C:\\Users\\jj0895\\AppData\\Local\\R-MINI~1\\pkgs\\matplotlib-3.9.1-py310h5588dad_2",
+  "files": [
+    ".nonadmin"
+  ],
+  "fn": "matplotlib-3.9.1-py310h5588dad_2.conda",
+  "license": "PSF-2.0",
+  "link": {
+    "source": "C:\\Users\\jj0895\\AppData\\Local\\R-MINI~1\\pkgs\\matplotlib-3.9.1-py310h5588dad_2",
+    "type": 1
+  },
+  "md5": "80de14438dc625cb932ded3b4cbed61e",
+  "name": "matplotlib",
+  "package_tarball_full_path": "C:\\Users\\jj0895\\AppData\\Local\\R-MINI~1\\pkgs\\matplotlib-3.9.1-py310h5588dad_2.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "matplotlib",
+  "sha256": "b6aebbfa53f31b703437e12990b3a56232c9284ec61a507c655a947f3411ebf2",
+  "size": 9110,
+  "subdir": "win-64",
+  "timestamp": 1722733754000,
+  "url": "https://conda.anaconda.org/conda-forge/win-64/matplotlib-3.9.1-py310h5588dad_2.conda",
+  "version": "3.9.1"
+}

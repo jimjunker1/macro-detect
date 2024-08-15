@@ -1,4 +1,4 @@
-==> 2024-08-14 18:58:19 <==
+==> 2024-08-15 13:48:52 <==
 # cmd: C:\Users\jj0895\AppData\Local\R-MINI~1\Scripts\conda-script.py create --yes --prefix C:/Users/jj0895/Documents/Projects/UNT_projects/macro-detect/virtualenv python=3.10 --quiet -c conda-forge
 # conda version: 24.7.1
 +conda-forge/noarch::pip-24.2-pyhd8ed1ab_0
@@ -19,3 +19,92 @@
 +conda-forge/win-64::vs2015_runtime-14.40.33810-h3bf8584_20
 +conda-forge/win-64::xz-5.2.6-h8d14728_0
 # update specs: ['python=3.10']
+==> 2024-08-15 13:49:28 <==
+# cmd: C:\Users\jj0895\AppData\Local\R-MINI~1\Scripts\conda-script.py install --yes --prefix C:/Users/jj0895/Documents/Projects/UNT_projects/macro-detect/virtualenv -c conda-forge scikit-learn Pillow
+# conda version: 24.7.1
++conda-forge/noarch::joblib-1.4.2-pyhd8ed1ab_0
++conda-forge/noarch::threadpoolctl-3.5.0-pyhc1e730c_0
++conda-forge/win-64::freetype-2.12.1-hdaf720e_2
++conda-forge/win-64::intel-openmp-2024.2.1-h57928b3_1083
++conda-forge/win-64::lcms2-2.16-h67d730c_0
++conda-forge/win-64::lerc-4.0.0-h63175ca_0
++conda-forge/win-64::libblas-3.9.0-23_win64_mkl
++conda-forge/win-64::libcblas-3.9.0-23_win64_mkl
++conda-forge/win-64::libdeflate-1.21-h2466b09_0
++conda-forge/win-64::libhwloc-2.11.1-default_h8125262_1000
++conda-forge/win-64::libiconv-1.17-hcfcfb64_2
++conda-forge/win-64::libjpeg-turbo-3.0.0-hcfcfb64_1
++conda-forge/win-64::liblapack-3.9.0-23_win64_mkl
++conda-forge/win-64::libpng-1.6.43-h19919ed_0
++conda-forge/win-64::libtiff-4.6.0-hb151862_4
++conda-forge/win-64::libwebp-base-1.4.0-hcfcfb64_0
++conda-forge/win-64::libxcb-1.16-hcd874cb_0
++conda-forge/win-64::libxml2-2.12.7-h0f24e4e_4
++conda-forge/win-64::m2w64-gcc-libgfortran-5.3.0-6
++conda-forge/win-64::m2w64-gcc-libs-5.3.0-7
++conda-forge/win-64::m2w64-gcc-libs-core-5.3.0-7
++conda-forge/win-64::m2w64-gmp-6.1.0-2
++conda-forge/win-64::m2w64-libwinpthread-git-5.0.0.4634.697f757-2
++conda-forge/win-64::mkl-2024.1.0-h66d3029_694
++conda-forge/win-64::msys2-conda-epoch-20160418-1
++conda-forge/win-64::numpy-2.0.1-py310h1ec8c79_0
++conda-forge/win-64::openjpeg-2.5.2-h3d672ee_0
++conda-forge/win-64::pillow-10.4.0-py310h3e38d90_0
++conda-forge/win-64::pthread-stubs-0.4-hcd874cb_1001
++conda-forge/win-64::pthreads-win32-2.9.1-hfa6e2cd_3
++conda-forge/win-64::python_abi-3.10-4_cp310
++conda-forge/win-64::scikit-learn-1.5.1-py310hf2a6c47_0
++conda-forge/win-64::scipy-1.14.0-py310h46043a1_1
++conda-forge/win-64::tbb-2021.12.0-hc790b64_3
++conda-forge/win-64::xorg-libxau-1.0.11-hcd874cb_0
++conda-forge/win-64::xorg-libxdmcp-1.1.3-hcd874cb_0
++conda-forge/win-64::zstd-1.5.6-h0ea2cb4_0
+# update specs: ['pillow', 'scikit-learn']
+==> 2024-08-15 16:34:06 <==
+# cmd: C:\Users\jj0895\AppData\Local\R-MINI~1\Scripts\conda-script.py install --yes --prefix C:/Users/jj0895/Documents/Projects/UNT_projects/macro-detect/virtualenv -c conda-forge scikit-learn Pillow matplotlib
+# conda version: 24.7.1
++conda-forge/noarch::certifi-2024.7.4-pyhd8ed1ab_0
++conda-forge/noarch::cycler-0.12.1-pyhd8ed1ab_0
++conda-forge/noarch::font-ttf-dejavu-sans-mono-2.37-hab24e00_0
++conda-forge/noarch::font-ttf-inconsolata-3.000-h77eed37_0
++conda-forge/noarch::font-ttf-source-code-pro-2.038-h77eed37_0
++conda-forge/noarch::font-ttf-ubuntu-0.83-h77eed37_2
++conda-forge/noarch::fonts-conda-ecosystem-1-0
++conda-forge/noarch::fonts-conda-forge-1-0
++conda-forge/noarch::munkres-1.1.4-pyh9f0ad1d_0
++conda-forge/noarch::packaging-24.1-pyhd8ed1ab_0
++conda-forge/noarch::pyparsing-3.1.2-pyhd8ed1ab_0
++conda-forge/noarch::python-dateutil-2.9.0-pyhd8ed1ab_0
++conda-forge/noarch::six-1.16.0-pyh6c4a22f_0
++conda-forge/win-64::brotli-1.1.0-hcfcfb64_1
++conda-forge/win-64::brotli-bin-1.1.0-hcfcfb64_1
++conda-forge/win-64::cairo-1.18.0-h32b962e_3
++conda-forge/win-64::contourpy-1.2.1-py310h232114e_0
++conda-forge/win-64::double-conversion-3.3.0-h63175ca_0
++conda-forge/win-64::expat-2.6.2-h63175ca_0
++conda-forge/win-64::fontconfig-2.14.2-hbde0cde_0
++conda-forge/win-64::fonttools-4.53.1-py310ha8f682b_0
++conda-forge/win-64::graphite2-1.3.13-h63175ca_1003
++conda-forge/win-64::harfbuzz-9.0.0-h2bedf89_1
++conda-forge/win-64::icu-75.1-he0c23c2_0
++conda-forge/win-64::kiwisolver-1.4.5-py310h232114e_1
++conda-forge/win-64::krb5-1.21.3-hdf4eb48_0
++conda-forge/win-64::libbrotlicommon-1.1.0-hcfcfb64_1
++conda-forge/win-64::libbrotlidec-1.1.0-hcfcfb64_1
++conda-forge/win-64::libbrotlienc-1.1.0-hcfcfb64_1
++conda-forge/win-64::libclang13-18.1.8-default_ha5278ca_2
++conda-forge/win-64::libexpat-2.6.2-h63175ca_0
++conda-forge/win-64::libglib-2.80.3-h7025463_2
++conda-forge/win-64::libintl-0.22.5-h5728263_3
++conda-forge/win-64::libxslt-1.1.39-h3df6e99_0
++conda-forge/win-64::matplotlib-3.9.1-py310h5588dad_2
++conda-forge/win-64::matplotlib-base-3.9.1-py310h37e0a56_2
++conda-forge/win-64::pcre2-10.44-h3d7b363_2
++conda-forge/win-64::pixman-0.43.4-h63175ca_0
++conda-forge/win-64::pyside6-6.7.2-py310h60c6385_2
++conda-forge/win-64::qhull-2020.2-hc790b64_5
++conda-forge/win-64::qt6-main-6.7.2-hbb46ec1_4
++conda-forge/win-64::tornado-6.4.1-py310ha8f682b_0
++conda-forge/win-64::unicodedata2-15.1.0-py310h8d17308_0
++conda-forge/win-64::zlib-1.3.1-h2466b09_1
+# update specs: ['matplotlib', 'pillow', 'scikit-learn']

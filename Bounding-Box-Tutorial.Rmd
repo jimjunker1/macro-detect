@@ -14,7 +14,7 @@ library(reticulate)
 
 ```
 
-```{r initiate}
+```{r initiate environments}
 # setup the virtual environment for python
 if (!dir.exists(here("virtualenv/"))) {
   reticulate::conda_create(here("virtualenv/"))
@@ -22,9 +22,13 @@ if (!dir.exists(here("virtualenv/"))) {
 # the .Rprofile should automatically use this python version
 reticulate::use_condaenv(here('virtualenv/'))
 # let's install the required python modules
-if(!reticulate::py_module_available('sklearn')){
+if(!all(reticulate::py_module_available('sklearn'), 
+        reticulate::py_module_available('PIL'),
+        reticulate::py_module_available('matplotlib'),
+        reticulate::py_module_available('json'))
+   ){
 reticulate::conda_install(
-  packages = c('scikit-learn'),
+  packages = c('scikit-learn', 'Pillow','matplotlib','json'),
   envname = here('virtualenv/')
 )}
 
@@ -32,13 +36,15 @@ if(!reticulate::py_module_available('tensorflow')){
 reticulate::py_install(
   packages = c('tensorflow'),
   envname = here('virtualenv/'),
-  pip = TRUE
+  pip = TRUE#,
+  # pip_ignore_installed =TRUE
 )}
 # set to use the local python environment
-sklearn <- reticulate::import('sklearn', convert = FALSE)
-tf <- reticulate::import('tensorflow', convert = FALSE)
+# sklearn <- reticulate::import('sklearn', convert = FALSE)
+# tf <- reticulate::import('tensorflow', convert = FALSE)
 
-
+reticulate::source_python(here("code/train_chatGPT_YOLO.py"))
+reticulate::source_python(here("code/evaluate_chatGPT_YOLO.py"))
 
 ```
 
