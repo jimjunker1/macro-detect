@@ -61,14 +61,38 @@ plt.plot(history_data['val_loss'], label='Validation Loss')
 plt.legend()
 plt.show() 
 
- # Assuming you have defined a data_generator function as shown earlier
-    steps_per_epoch = len(train_image_paths) // batch_size
-    validation_steps = len(val_image_paths) // batch_size
-# Load the saved .keras model
-    model = tf.keras.models.load_model(f'data/models/{taxa_name}_bounding_box_model.keras')
 
-    # Call the evaluate and plot function
-    evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps)
+model = tf.keras.models.load_model(f'data/models/{taxa_name}_bounding_box_model.keras')
+
+# test 
+  
+  
+  
+  ## model with classification
+  
+   # Example usage:
+input_shape = (224, 224, 3)
+num_classes = 10  # Assume 10 different classes
+model = create_model_with_classification(input_shape, num_classes)
+
+# Compile the model
+model.compile(optimizer='adam',
+              loss={'bbox_output': 'mse', 'class_output': 'categorical_crossentropy'},
+              metrics={'bbox_output': 'mae', 'class_output': 'accuracy'})
+
+# Summary of the model
+model.summary()
+
+
+
+# 
+#  # Assuming you have defined a data_generator function as shown earlier
+#     steps_per_epoch = len(train_image_paths) // batch_size
+#     validation_steps = len(val_image_paths) // batch_size
+# # Load the saved .keras model
+# 
+#     # Call the evaluate and plot function
+#     evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps)
 
 
 

@@ -188,6 +188,43 @@ def calculate_iou(pred_boxes, true_boxes):
         iou_scores.append(iou)
     
     return np.array(iou_scores)
+  
+def create_model_with_classification(input_shape, num_classes):
+    model = models.Sequential()
+
+    # Convolutional layers
+    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    # Flatten and dense layers
+    model.add(layers.Flatten())
+    model.add(layers.Dense(128, activation='relu'))
+    model.add(layers.Dense(64, activation='relu'))
+
+    # Output layers:
+    # 4 units for bounding box regression (x_min, y_min, x_max, y_max)
+    bbox_output = layers.Dense(4, activation='linear', name='bbox_output')
+
+    # num_classes units for classification (one-hot encoded)
+    class_output = layers.Dense(num_classes, activation='softmax', name='class_output')
+
+    # Create the model with two outputs
+    model = models.Model(inputs=model.input, outputs=[bbox_output, class_output])
+
+    return model
+  
+  # Predict on a new image
+bbox_pred, class_pred = model.predict(preprocessed_image)
+
+# Class with the highest probability
+predicted_class = np.argmax(class_pred, axis=1)
+
 
 # import matplotlib.pyplot as plt
 # import numpy as np

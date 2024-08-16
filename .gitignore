@@ -161,3 +161,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .Rproj.user
+
+## ignore the virtualenv folder to allow for initial setups to install the pacakges fresh
+virtualenv/

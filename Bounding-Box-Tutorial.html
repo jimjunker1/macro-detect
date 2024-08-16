@@ -11,7 +11,7 @@
 
 <meta name="author" content="Jim Junker" />
 
-<meta name="date" content="2024-07-23" />
+<meta name="date" content="2024-08-15" />
 
 <title>Bounding Box Tutorial</title>
 
@@ -354,7 +354,7 @@ display: none;
 <h3 class="subtitle">Workflow to annotate, train, and predict bounding
 boxes for AutoTaxonomizer</h3>
 <h4 class="author">Jim Junker</h4>
-<h4 class="date">2024-07-23</h4>
+<h4 class="date">2024-08-15</h4>
 
 </div>
 
@@ -369,18 +369,24 @@ a bounding box regression model to automate the bounding box
 process.</p>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
-<p>First, we need to ensure we have the necessary programs are install
-on your device. To accomplish the tasks, the following programs are
-required:</p>
+<p>The current project is configured to minimize individual set up time.
+To do this, it manages packages using the <code>renv</code> R package
+that creates a snapshot of specific packages and versions. This packages
+library is loaded when the project is opened. However, there are a few
+steps that need to be taken to initialize the project on a new
+computer.</p>
+<p>First, we need to ensure we have the necessary programs are installed
+on your device. The following programs are required:</p>
 <ul>
-<li><p>Python <a href="https://www.python.org/downloads/windows/">windows</a>,<a href="https://www.python.org/downloads/macos/">macOS</a></p></li>
-<li><p>Tensorflow <a href="https://www.tensorflow.org/install/pip#windows-wsl2">windows</a>,
-<a href="https://www.tensorflow.org/install/pip#macos">macOS</a></p></li>
+<li>Python <a href="https://www.python.org/downloads/windows/">windows</a>,<a href="https://www.python.org/downloads/macos/">macOS</a></li>
 </ul>
-<p>optional programs:</p>
-<ul>
-<li></li>
-</ul>
+<p>This program can be installed from the <a href="https://rstudio.github.io/reticulate/index.html"><code>reticulate</code></a>
+package’s <code>install_python()</code> function.
+<code>reticulate</code> should be loaded by <code>renv</code> and then
+Python can be installed with:</p>
+<pre class="r"><code>reticulate::install_python()</code></pre>
+<p>Second, you can install the conda environment manager with:</p>
+<pre class="r"><code>reticulate::install_miniconda()</code></pre>
 </div>
 <div id="image-annotation" class="section level2">
 <h2>Image annotation</h2>
@@ -390,6 +396,12 @@ annotation platform, <a href="https://www.cvat.ai/">CVAT</a>. We will
 run the platform through a shared organization, contact Jim (<a href="mailto:james.junker@unt.edu" class="email">james.junker@unt.edu</a>) to get access to the
 organization. The organization is organized based on projects and
 specific tasks within projects.</p>
+<ul>
+<li><p>get some screenshots of workflow</p></li>
+<li><p>CVAT</p></li>
+<li><p>saving procedures and output directions for directory</p></li>
+<li></li>
+</ul>
 </div>
 <div id="bounding-box-regression" class="section level2">
 <h2>Bounding Box Regression</h2>
@@ -399,6 +411,7 @@ With a video tutorial <a href="https://www.google.com/search?client=firefox-b-1-
 Be sure you have installed Python and Tensorflow to perform the
 following analyses.
 </center>
+<!-- #https://pyimagesearch.com/2019/06/03/fine-tuning-with-keras-and-deep-learning/ -->
 <p> </p>
 </div>
 </div>

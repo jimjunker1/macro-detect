@@ -10,41 +10,6 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(here)
 i_am('Bounding-Box-Tutorial.Rmd')
-library(reticulate)
-
-```
-
-```{r initiate environments}
-# setup the virtual environment for python
-if (!dir.exists(here("virtualenv/"))) {
-  reticulate::conda_create(here("virtualenv/"))
-}
-# the .Rprofile should automatically use this python version
-reticulate::use_condaenv(here('virtualenv/'))
-# let's install the required python modules
-if(!all(reticulate::py_module_available('sklearn'), 
-        reticulate::py_module_available('PIL'),
-        reticulate::py_module_available('matplotlib'),
-        reticulate::py_module_available('json'))
-   ){
-reticulate::conda_install(
-  packages = c('scikit-learn', 'Pillow','matplotlib','json'),
-  envname = here('virtualenv/')
-)}
-
-if(!reticulate::py_module_available('tensorflow')){
-reticulate::py_install(
-  packages = c('tensorflow'),
-  envname = here('virtualenv/'),
-  pip = TRUE#,
-  # pip_ignore_installed =TRUE
-)}
-# set to use the local python environment
-# sklearn <- reticulate::import('sklearn', convert = FALSE)
-# tf <- reticulate::import('tensorflow', convert = FALSE)
-
-reticulate::source_python(here("code/train_chatGPT_YOLO.py"))
-reticulate::source_python(here("code/evaluate_chatGPT_YOLO.py"))
 
 ```
 
@@ -54,15 +19,33 @@ This document outlines the steps to setup the workflow for image detection of aq
 
 ## Setup
 
-First, we need to ensure we have the necessary programs are install on your device. To accomplish the tasks, the following programs are required:
+The current project is configured to minimize individual set up time. To do this, it manages directories using the `here`packages and the package library using the `renv`package for organizing specific packages and versions. The `renv` library is loaded when the project is opened. However, there are a few steps that need to be taken to initialize the project on a new computer.
+
+First, we need to ensure we have the necessary programs are installed on your device. The following programs are required:
 
 - Python [windows](https://www.python.org/downloads/windows/),[macOS](https://www.python.org/downloads/macos/)
 
-- Tensorflow [windows](https://www.tensorflow.org/install/pip#windows-wsl2), [macOS](https://www.tensorflow.org/install/pip#macos)
+This program can be installed from the [`reticulate`](https://rstudio.github.io/reticulate/index.html) package's `install_python()` function. `reticulate` should be loaded by `renv` and then Python can be installed with:  
 
-optional programs:
+```{r install python, echo = TRUE, eval = FALSE}
 
-- 
+reticulate::install_python()
+
+```
+
+Second, you can install the conda environment manager with:
+
+```{r install conda, echo = TRUE, eval = FALSE}
+reticulate::install_miniconda()
+```
+
+This allows us to manage environments and package dependencies necessary for performing the machine learning procedures below.
+
+Lastly, we can initiate other project level setup that will create a virtual environment to manage python modules. Sourcing the R script will create a new folder and install the required modules:
+
+```{r initiate environments, echo=TRUE, eval=FALSE}
+source(here("code/initiate-envs.R"))
+```
 
 ## Image annotation
 
@@ -82,7 +65,14 @@ This outline is loosely based upon this guide [here](https://pyimagesearch.com/2
 
 <center>Be sure you have installed Python and Tensorflow to perform the following analyses.</center>
 
+Load the required definitions for training the bounding box regression on 
 
+```{r initiate python script, echo = TRUE, eval = FALSE}
+reticulate::source_python(here("code/train_chatGPT_YOLO.py"))
+reticulate::source_python(here("code/evaluate_chatGPT_YOLO.py"))
+```
+
+The procedure to perform the bounding box regression can be
 
 <!-- #https://pyimagesearch.com/2019/06/03/fine-tuning-with-keras-and-deep-learning/ -->
 
