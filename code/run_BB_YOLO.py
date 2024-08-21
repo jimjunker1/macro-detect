@@ -65,10 +65,9 @@ plt.show()
 model = tf.keras.models.load_model(f'data/models/{taxa_name}_bounding_box_model.keras')
 
 # test 
-  
-  
-  
-  ## model with classification
+
+
+## model with classification
   
    # Example usage:
 input_shape = (224, 224, 3)
@@ -83,7 +82,11 @@ model.compile(optimizer='adam',
 # Summary of the model
 model.summary()
 
+  # Predict on a new image
+bbox_pred, class_pred = model.predict(preprocessed_image)
 
+# Class with the highest probability
+predicted_class = np.argmax(class_pred, axis=1)
 
 # 
 #  # Assuming you have defined a data_generator function as shown earlier

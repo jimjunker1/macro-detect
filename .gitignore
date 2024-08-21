@@ -164,3 +164,8 @@ cython_debug/
 
 ## ignore the virtualenv folder to allow for initial setups to install the pacakges fresh
 virtualenv/
+
+# ignore tempfiles from office
+~$*
+
+

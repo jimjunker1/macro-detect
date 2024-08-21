@@ -1,26 +1,6 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
-import json
 
-def evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps):
-    """
-    Evaluates and plots the performance of a Keras model using data generators.
-    
-    Parameters:
-    - model: A trained Keras model.
-    - val_generator: A generator function that yields batches of validation data.
-    - steps_per_epoch: The number of steps (batches) to draw from the generator for evaluation.
-    - validation_steps: The number of steps (batches) for validation (if any).
-    
-    Returns:
-    - A summary of the model's performance including loss and metrics, and plots for loss and metrics (if available).
-    """
 
-    # Evaluate the model using the validation data generator
-    evaluation = model.evaluate(val_generator, steps=validation_steps, verbose=1)
-    print(f"Validation Loss: {evaluation[0]}")
-    print(f"Validation MAE: {evaluation[1]}")
+
 
     # # Check if training history is available
     # if hasattr(model, 'history') and model.history is not None:
@@ -68,5 +48,5 @@ def evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps)
     # 
     #     plt.tight_layout(pad=4.0)
     #     plt.show()
-    else:
-        print("No training history found, skipping plots.")
+    # else:
+        # print("No training history found, skipping plots.")

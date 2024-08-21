@@ -108,3 +108,54 @@
 +conda-forge/win-64::unicodedata2-15.1.0-py310h8d17308_0
 +conda-forge/win-64::zlib-1.3.1-h2466b09_1
 # update specs: ['matplotlib', 'pillow', 'scikit-learn']
+==> 2024-08-20 10:14:19 <==
+# cmd: C:\Users\jj0895\AppData\Local\R-MINI~1\Scripts\conda-script.py install --yes --prefix C:/Users/jj0895/Documents/Projects/UNT_projects/macro-detect/virtualenv -c conda-forge google-cloud-storage
+# conda version: 24.7.1
++conda-forge/noarch::aiohappyeyeballs-2.3.7-pyhd8ed1ab_0
++conda-forge/noarch::aiosignal-1.3.1-pyhd8ed1ab_0
++conda-forge/noarch::async-timeout-4.0.3-pyhd8ed1ab_0
++conda-forge/noarch::attrs-24.2.0-pyh71513ae_0
++conda-forge/noarch::cachetools-5.5.0-pyhd8ed1ab_0
++conda-forge/noarch::charset-normalizer-3.3.2-pyhd8ed1ab_0
++conda-forge/noarch::google-api-core-2.19.1-pyhd8ed1ab_0
++conda-forge/noarch::google-auth-2.33.0-pyhff2d567_0
++conda-forge/noarch::google-cloud-core-2.4.1-pyhd8ed1ab_0
++conda-forge/noarch::google-cloud-storage-2.18.2-pyhff2d567_0
++conda-forge/noarch::google-resumable-media-2.7.2-pyhd8ed1ab_1
++conda-forge/noarch::googleapis-common-protos-1.63.2-pyhd8ed1ab_0
++conda-forge/noarch::h2-4.1.0-pyhd8ed1ab_0
++conda-forge/noarch::hpack-4.0.0-pyh9f0ad1d_0
++conda-forge/noarch::hyperframe-6.0.1-pyhd8ed1ab_0
++conda-forge/noarch::idna-3.7-pyhd8ed1ab_0
++conda-forge/noarch::proto-plus-1.23.0-pyhd8ed1ab_0
++conda-forge/noarch::pyasn1-0.6.0-pyhd8ed1ab_0
++conda-forge/noarch::pyasn1-modules-0.4.0-pyhd8ed1ab_0
++conda-forge/noarch::pycparser-2.22-pyhd8ed1ab_0
++conda-forge/noarch::pyopenssl-24.2.1-pyhd8ed1ab_2
++conda-forge/noarch::pysocks-1.7.1-pyh0701188_6
++conda-forge/noarch::pyu2f-0.1.5-pyhd8ed1ab_0
++conda-forge/noarch::requests-2.32.3-pyhd8ed1ab_0
++conda-forge/noarch::rsa-4.9-pyhd8ed1ab_0
++conda-forge/noarch::typing-extensions-4.12.2-hd8ed1ab_0
++conda-forge/noarch::typing_extensions-4.12.2-pyha770c72_0
++conda-forge/noarch::urllib3-2.2.2-pyhd8ed1ab_1
++conda-forge/noarch::win_inet_pton-1.1.0-pyhd8ed1ab_6
++conda-forge/win-64::aiohttp-3.10.4-py310ha8f682b_0
++conda-forge/win-64::brotli-python-1.1.0-py310h00ffb61_1
++conda-forge/win-64::c-ares-1.33.0-h2466b09_0
++conda-forge/win-64::cffi-1.17.0-py310ha8f682b_0
++conda-forge/win-64::cryptography-43.0.0-py310h25a5809_0
++conda-forge/win-64::frozenlist-1.4.1-py310h8d17308_0
++conda-forge/win-64::google-crc32c-1.1.2-py310ha7be474_5
++conda-forge/win-64::grpcio-1.62.2-py310hb84602e_0
++conda-forge/win-64::libabseil-20240116.2-cxx17_he0c23c2_1
++conda-forge/win-64::libcrc32c-1.1.2-h0e60522_0
++conda-forge/win-64::libgrpc-1.62.2-h5273850_0
++conda-forge/win-64::libprotobuf-4.25.3-h503648d_0
++conda-forge/win-64::libre2-11-2023.09.01-hf8d8778_2
++conda-forge/win-64::multidict-6.0.5-py310h8d17308_0
++conda-forge/win-64::protobuf-4.25.3-py310hf536535_0
++conda-forge/win-64::re2-2023.09.01-hd3b24a8_2
++conda-forge/win-64::yarl-1.9.4-py310h8d17308_0
++conda-forge/win-64::zstandard-0.23.0-py310he5e10e1_0
+# update specs: ['google-cloud-storage']

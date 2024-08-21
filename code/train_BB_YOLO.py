@@ -6,6 +6,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import os
 from PIL import Image
+import json
+import io
 
 # Define the neural network model
 def create_model(input_shape):
@@ -218,14 +220,26 @@ def create_model_with_classification(input_shape, num_classes):
     model = models.Model(inputs=model.input, outputs=[bbox_output, class_output])
 
     return model
+
+def evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps):
+    """
+    Evaluates and plots the performance of a Keras model using data generators.
+    
+    Parameters:
+    - model: A trained Keras model.
+    - val_generator: A generator function that yields batches of validation data.
+    - steps_per_epoch: The number of steps (batches) to draw from the generator for evaluation.
+    - validation_steps: The number of steps (batches) for validation (if any).
+    
+    Returns:
+    - A summary of the model's performance including loss and metrics, and plots for loss and metrics (if available).
+    """
+
+    # Evaluate the model using the validation data generator
+    evaluation = model.evaluate(val_generator, steps=validation_steps, verbose=1)
+    print(f"Validation Loss: {evaluation[0]}")
+    print(f"Validation MAE: {evaluation[1]}")
   
-  # Predict on a new image
-bbox_pred, class_pred = model.predict(preprocessed_image)
-
-# Class with the highest probability
-predicted_class = np.argmax(class_pred, axis=1)
-
-
 # import matplotlib.pyplot as plt
 # import numpy as np
 # import tensorflow as tf

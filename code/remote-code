@@ -1,0 +1,4 @@
+# This script contains instructions for running the classification and bounding
+# box model on Google Cloud Services. In the future, a TACC account will be
+# created to complete these tasks.
+
