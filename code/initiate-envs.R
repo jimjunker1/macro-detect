@@ -1,4 +1,7 @@
-# setup the virtual environment for python
+library(here)
+library(knitr)
+i_am("code/initiate-envs.R")
+#setup the virtual environment for python
 if (!dir.exists(here("virtualenv/"))) {
   reticulate::conda_create(here("virtualenv/"))
 }

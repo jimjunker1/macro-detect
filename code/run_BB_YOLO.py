@@ -65,8 +65,29 @@ plt.show()
 model = tf.keras.models.load_model(f'data/models/{taxa_name}_bounding_box_model.keras')
 
 # test 
+# test image directories
+    test_taxa_name = "hesp_set1"
+    test_label_dir = f'test/labels/{test_taxa_name}/obj_Test_data/'  # Directory containing YOLO v1.1 label files
+    test_image_dir = f'test/images/{test_taxa_name}/'  # Directory containing the corresponding images
 
+test_image_paths, test_bounding_boxes = load_data_from_yolo(test_label_dir, test_image_dir)
 
+bbox_pred = predict_bounding_boxes(model, test_image_paths, input_shape, batch_size = 32)
+
+model_eval = evaluate_model(model, test_image_paths, test_bounding_boxes, input_shape)
+
+# test 2
+# test image directories
+# test image directories
+    test_taxa_name = "mayfly_Ameletus_inopinatus_set0"
+    test_label_dir = f'test/labels/{test_taxa_name}/obj_Train_data/'  # Directory containing YOLO v1.1 label files
+    test_image_dir = f'test/images/{test_taxa_name}/'  # Directory containing the corresponding images
+
+test_image_paths, test_bounding_boxes = load_data_from_yolo(test_label_dir, test_image_dir)
+
+bbox_pred = predict_bounding_boxes(model, test_image_paths, input_shape, batch_size = 32)
+
+model_eval = evaluate_model(model, test_image_paths, test_bounding_boxes, input_shape)
 ## model with classification
   
    # Example usage:

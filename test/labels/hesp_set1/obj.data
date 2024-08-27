@@ -1,0 +1,4 @@
+classes = 1
+Test = data/Test.txt
+names = data/obj.names
+backup = backup/

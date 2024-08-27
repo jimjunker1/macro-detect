@@ -1,0 +1,323 @@
+---
+author: Jim Junker
+date: '`r format(Sys.Date())`'
+title: Bounding Box Tutorial
+subtitle: Workflow to annotate, train, and predict bounding boxes for AutoTaxonomizer
+output:
+  rmdformats::html_clean:
+    lightbox: true
+---
+
+```{r setup, include = FALSE, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(here)
+library(knitr)
+i_am('articles/Bounding-Box-Tutorial.Rmd')
+
+```
+
+# Purpose
+
+This document outlines the steps to setup the workflow for image detection of aquatic macroinvertebrates for the 'AutoTaxonomizer' project. It includes steps to download and configure tools to help annotate images, export bounding box information, and train and validate a bounding box regression model to automate the bounding box process.
+
+## Setup
+
+The current project is configured to minimize individual set up time. To do this, it manages directories using the `here`packages and the package library using the `renv`package for organizing specific packages and versions. The `renv` library is loaded when the project is opened. However, there are a few steps that need to be taken to initialize the project on a new computer.
+
+First, we need to ensure we have the necessary programs are installed on your device. The following programs are required:
+
+- Python [windows](https://www.python.org/downloads/windows/),[macOS](https://www.python.org/downloads/macos/)
+
+This program can be installed from the [`reticulate`](https://rstudio.github.io/reticulate/index.html) package's `install_python()` function. `reticulate` should be loaded by `renv` and then Python can be installed with:  
+
+```{r install python, echo = TRUE, eval = FALSE}
+
+reticulate::install_python()
+
+```
+
+Second, you can install the conda environment manager with:
+
+```{r install conda, echo = TRUE, eval = FALSE}
+reticulate::install_miniconda()
+```
+
+This allows us to manage environments and package dependencies necessary for performing the machine learning procedures below.
+
+Lastly, we can initiate other project level setup that will create a virtual environment to manage python modules. Sourcing the R script will create a new folder and install the required modules:
+
+```{r initiate environments, echo=TRUE, eval=FALSE}
+source(here("code/initiate-envs.R"))
+```
+
+## Image annotation
+
+The process of image annotation is a necessary, if laborious, process for image detection. To streamline the process we will use the open data annotation platform, [CVAT](https://www.cvat.ai/). We will run the platform through a shared organization, contact Jim (james.junker@unt.edu) to get access to the organization. The organization is organized based on projects and specific tasks within projects. 
+
+```{r project capture, out.width="60%", fig.align='center', fig.cap = "Screenshot of the 'projects' page of app.cvat.ai. Be sure you have selected the correct organization from the dropdown menu in the upper-right. It should be set to 'AutoTaxa'."}
+
+include_graphics(here("articles/project-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+If you are in the correct organization, you should notice a number of training tasks for taxonomic groups. In the above image there are: "mayfly annotation", "caddisfly annotation", and "Stonefly annotation". You can click on one of the task panes or the 'Tasks' or 'Jobs' menu. This will show the individual jobs in the project and their status. 
+
+```{r jobs capture, out.width="60%", fig.align='center', fig.cap = "Screenshot of the 'Jobs' page of app.cvat.ai. This page will show the jobs and current status. You can open a job to look at individual images and being annotating if necessary."}
+
+include_graphics(here("articles/jobs-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+After a job is opened, you can start annotating with bounding boxes. Currently, each job has only a single specimen and class ID (e.g., stonefly, mayfly, caddisfly, etc.), so the process is fairly straightforward.
+
+```{r BB capture, out.width="60%", fig.align='center', fig.cap = "Screenshot showing an example bounding box annotated on an stonefly image. The bounding box should encapsulate the entire organism. See details below for other tips and tricks."}
+
+include_graphics(here("articles/cvat-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+<details>
+  <summary>Click for Tips</summary>
+
+&nbsp;
+
+***Tips and Tricks***
+
+- Set the 'Single Shape' option (below)
+
+```{r shortcut capture, out.width="60%", fig.align='center', fig.cap = "If the annotation job only has a single class ID and you are annotating bounding boxes with the rectangle shape, you can make this easy by selecting 'Single Shape' from the upper-right menu (highlighted below). This can speed up annotating considerable because it will keep the 'rectangle' tool selected and (optionally) automatically move to the next image when the annotation is complete."}
+
+include_graphics(here("articles/shortcut-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+- If an object is two pieces, select only the largest intact piece
+
+- If an object is not completely within the image, set the bounding box as close to the borders as possible.
+
+</details>
+
+&nbsp;
+
+Once you have completed a job, you can save your work and mark the job as 'complete' in the three-bar menu ( $\equiv$ ) in the upper-left.
+
+### Exporting images
+
+When a job is complete and the image data are ready to be used for model training, testing, or validation you can export the data. This can be accomplished from multiple menus and one such example is highlighted below from the 'Tasks' page. Once the export has been requested, CVAT will organize and download the data set. This then becomes available to be accessed from the 'Requests' page.
+
+```{r export capture, out.width="60%", fig.align='center', fig.cap = "Exporting completed data sets can be done from multiple places. From the 'Tasks' page, a data set can be exported by clicking the ' $\\vdots$ ' symbol on the right-hand side of an individual job and then selecting the `Export task dataset` (highlighted)."}
+
+include_graphics(here("articles/export-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+### Saving images
+
+After you select to export the data set, CVAT will ask for some details about how to save the data for export. First, the 'Export format' for this project is YOLO 1.1. Select it from the drop-down menu (all the way at the bottom). Second is the the file name. Name the file after the image set you are exporting, e.g., 'stonefly_hesp_set0', 'mayfly_Ameletus_inopinatus_set0', etc.).
+
+```{r save capture, out.width="60%", fig.align='center', fig.cap = "Saving the data set is the final step of the image annotation workflow. Be sure to save in the correct format (YOLO 1.1) and name the file after the image set you are exporting (e.g., 'stonefly_hesp_set0' for #829538 in the above example)."}
+
+include_graphics(here("articles/save-screen-capture.PNG"), rel_path = FALSE)
+
+```
+
+Finally, you can extract the annotation data set to the appropriate location for storing images. Currently in the `macro-detect` project we use the 'macro-detect/data/labels/<image-set-name>/' folder.
+
+```{r labels tree,}
+
+fs::dir_tree(path = './data', recurse = 1, type = 'directory', regexp = 'labels')
+
+```
+
+You also must save the raw images in the project. Currently we use 'macro-detect/data/images/<image-set-name>/'. 
+
+```{r image tree,}
+
+fs::dir_tree(path = './data', recurse = 2, type = 'directory', regexp = 'images')
+
+```
+
+The individual image names must be the same as the individual image names exported from CVAT.
+
+## Bounding Box Regression
+
+The Bounding Box regression model allows us to automatically detect objects and the coordinates of a bounding box that completely encapsulates an object of interest. Below we train a model using annotated images of individual macroinvertebrates. This model will then be used to automate the bounding box task for future images.
+
+<center><big>Be sure you have installed Python and Tensorflow to perform the following analyses.</big></center>
+
+&nbsp;
+
+Load the required definitions for training the bounding box regression 
+
+```{r initiate python script, echo = TRUE, eval = FALSE}
+reticulate::source_python(here("code/train_BB_YOLO.py"))
+# reticulate::source_python(here("code/evaluate_BB_YOLO.py"))
+```
+
+The procedure to perform the bounding box regression can be run with the code found in `run_BB_YOLO.py` script in the './code/' folder. Below is a step-by-step walkthru of the main parts of that script.
+
+### Bounding Box regression 
+
+#### Train-Test-Validate
+
+First, we set the directory paths for the image set we want to use for training and testing. 
+
+```{python directories, echo = TRUE, eval = FALSE}
+    # Define directories
+    taxa_name = 'baetis_niger'
+    label_dir = f'data/labels/{taxa_name}/obj_Train_data/'  # Directory containing YOLO v1.1 label files
+    image_dir = f'data/images/{taxa_name}/'  # Directory containing the corresponding images
+
+```
+
+Next, we load the data from the YOLO files using the `load_data_from_yolo()` function by passing the label and image directory paths defined above. This function returns the image file paths and the bounding box coordinates extracted from the annotated image data set.
+
+```{python load yolo, echo = TRUE, eval = FALSE}
+ # Load data from YOLO files
+    image_paths, bounding_boxes = load_data_from_yolo(label_dir, image_dir)
+```
+
+Then we will set the model parameters:
+
+```{python parameters, echo=TRUE, eval = FALSE}
+    # Parameters
+    input_shape = (224, 224, 3)  # Example input shape (height, width, channels)
+    batch_size = 2
+    epochs = 10
+    test_size = 0.2  # 20% for validation
+```
+
+Then using the `train_test_split` procedure from the `scikit-learn` module to split the data into training and validation sets,
+
+```{python data split, echo = TRUE, eval = FALSE}
+    # Split the data into training and validation sets
+    train_image_paths, val_image_paths, train_bboxes, val_bboxes = train_test_split(
+        image_paths, bounding_boxes, test_size=test_size, random_state=42
+    )
+```
+
+
+
+and create and compile the model. The model creation step defines the Neural network model:
+
+<details>
+  <summary>Click for model definitions</summary>
+
+```{python create model, echo = TRUE, eval = FALSE}
+# Define the neural network model
+def create_model(input_shape):
+    model = models.Sequential()
+    
+    # Define the input layer with the specified shape
+    model.add(Input(shape=input_shape))
+
+    # Convolutional layers
+    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+    model.add(layers.MaxPooling2D((2, 2)))
+
+    # Flatten and dense layers
+    model.add(layers.Flatten())
+    model.add(layers.Dense(128, activation='relu'))
+    model.add(layers.Dense(64, activation='relu'))
+
+    # Output layer: 4 units for the bounding box (x_min, y_min, x_max, y_max)
+    model.add(layers.Dense(4, activation='linear'))
+
+    return model
+```
+
+and the compile step defines the optimization, loss function, and other metrics: 
+
+```{python compile model, echo = TRUE, eval = FALSE}
+# Compile the model
+def compile_model(model):
+    model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+    return model
+```
+
+</details>
+
+```{python create-compile, echo = TRUE, eval = FALSE}
+ # Create and compile the model
+    model = create_model(input_shape)
+    model = compile_model(model)
+
+    # Create data generators
+    train_generator = data_generator(train_image_paths, train_bboxes, batch_size, input_shape)
+    val_generator = data_generator(val_image_paths, val_bboxes, batch_size, input_shape)
+    # set early stopping criteria to avoid over-fitting
+    early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
+```
+
+Worth noting in the preceeding code block are two things, 1) the `data_generator` function is an iterator the supplies batches of preprocessed image data and corresponding labels data to the model. This function increases the memory efficiency of the model. This function returns a NumPy array of images with corresponding label data. 2) `early_stopping` is a function to prevent model overfitting by halting the training process once the model's performance on validation sets stops improving after a number of consecutive epochs determined by the `patience` parameter.
+
+Finally, we can fit the model,
+
+```{python model fit, echo = TRUE, eval = FALSE}
+    # Train the model with validation data
+    history = model.fit(
+        train_generator,
+        steps_per_epoch=len(train_image_paths) // batch_size,
+        epochs=epochs,
+        validation_data=val_generator,
+        validation_steps=len(val_image_paths) // batch_size,
+        callbacks=[early_stopping]
+    )
+```
+
+We name the model output 'history' to allow us to save the model history for future evaluation:
+
+```{python history save, echo=TRUE, eval = FALSE}    
+with open(f'data/models/{taxa_name}_training_history.json', 'w') as f:
+        json.dump(history.history, f)
+```
+
+If the model run is adequate, we can save the model itself as a `.keras` object:
+
+```{python model save, echo = TRUE, eval = FALSE}
+# 
+ model.save(f"data/models/{taxa_name}_bounding_box_model.keras")
+```
+
+The model name is based on the image set used to train the model. 
+
+#### Model evaluation
+
+We can then plot the model evaluation based on the model history we saved:
+
+```{python history load, echo = TRUE, eval = TRUE}
+import matplotlib.pyplot as plt
+import json
+
+taxa_name = 'baetis_niger'
+# Example of loading the history
+with open(f'data/models/{taxa_name}_training_history.json', 'r') as f:
+  history_data = json.load(f)
+  
+model = tf.keras.models.load_model(f'data/models/{taxa_name}_bounding_box_model.keras')
+model.get_config
+```
+
+```{python model plot, echo = TRUE, eval = TRUE, results='hide',fig.keep = 'all', fig.align = 'center', fig.cap = "Plot showing training and validation loss of neural network model." }
+plt.clf()
+plt.plot(history_data['loss'], label = 'Training Loss')
+plt.plot(history_data['val_loss'], label='Validation Loss')
+plt.legend()
+plt.show()
+```
+
+```{python model iuo}
+
+
+```
+
+
+<!-- #https://pyimagesearch.com/2019/06/03/fine-tuning-with-keras-and-deep-learning/ This outline is loosely based upon this guide [here](https://pyimagesearch.com/2020/10/05/object-detection-bounding-box-regression-with-keras-tensorflow-and-deep-learning/). With a video tutorial [here](https://www.google.com/search?client=firefox-b-1-e&q=bounding+box+regression+Keras+Tensorflow+tutorial+with+code#fpstate=ive&vld=cid:eaa207bd,vid:QcA7zjBpbVg,st:0). This served as a -->
+
+&nbsp;

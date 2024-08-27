@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers, models, Input
 from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import numpy as np
 from sklearn.model_selection import train_test_split
 import os
@@ -240,6 +241,27 @@ def evaluate_plot_model(model, val_generator, steps_per_epoch, validation_steps)
     print(f"Validation Loss: {evaluation[0]}")
     print(f"Validation MAE: {evaluation[1]}")
   
+def predict_bounding_boxes(model, image_paths, input_shape, batch_size=32):
+    """Predict bounding boxes for a list of images using a trained model."""
+    predictions = []
+    
+    #ensure batch_size in an integer
+    batch_size = int(batch_size)
+
+    # Loop over the image paths in batches
+    for i in range(0, len(image_paths), batch_size):
+        batch_paths = image_paths[i:i + batch_size]
+        
+        # Preprocess the images in the current batch
+        batch_images = np.vstack([load_and_preprocess_image(img_path, input_shape) for img_path in batch_paths])
+        
+        # Make predictions for the current batch
+        batch_preds = model.predict(batch_images)
+        
+        # Store the predictions
+        predictions.extend(batch_preds)
+
+    return np.array(predictions)
 # import matplotlib.pyplot as plt
 # import numpy as np
 # import tensorflow as tf

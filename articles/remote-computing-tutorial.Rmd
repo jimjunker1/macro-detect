@@ -1,0 +1,11 @@
+---
+author: Jim Junker
+date: '`r format(Sys.Date())`'
+title: Bounding Box Tutorial
+subtitle: Workflow to annotate, train, and predict bounding boxes for AutoTaxonomizer
+output:
+  rmdformats::html_clean:
+    lightbox: true
+---
+
+
